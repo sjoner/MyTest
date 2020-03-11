@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+<p>通过JS调用三种不同的原生对话框</p>
+<p>验证用户信息</p>
+<p>
+    <input type="submit" name="Submit1" value="验证用户信息" onclick="alertFun()"/>
+</p>
+<p>Confirm对话框</p>
+<p>
+    <input type="submit" name="Submit2" value="展示Confirm对话框" onclick="confirmFun()"/>
+</p>
+<p>Prompt对话框</p>
+<p>
+    <input type="submit" name="Submit3" value="展示Prompt对话框" onclick="promptFun()"/>
+</p>
+<script language="JavaScript">
+        function alertFun() {
+            if(window.postAppMessage){
+                alert("注入成功")
+            }else{
+                alert("注入失败")
+            }
+            window.postAppMessage("fetchUserInfo","params",function(result){
+            })
+        };
+        function confirmFun() {
+            if (confirm("访问百度?")) {
+                location.href = "http://www.baidu.com";
+            } else alert("取消访问!");
+        };
+        function promptFun() {
+            var word = prompt("对YuTao说的话写在下面吧", "对YuTao说的话写在这里吧");
+            if (word) {
+                alert("你输入了:" + word)
+            } else {
+                alert("呵呵,你什么都没写!");
+            }
+        }
+</script>
+</body>
+
+</html>
